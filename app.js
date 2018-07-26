@@ -3,12 +3,24 @@ const sprite = $("#sprite");
 const meterContainer = $("#meter-container");
 const meter = $("#meter");
 
-const powerLevels = {
-  100: {
-    current: "base",
-    next: "ssj"
+const saiyanLevels = [
+  {
+    class: "base",
+    label: "Normal form",
+    powerLevel: {
+      min: 0,
+      max: 99
+    }
+  },
+  {
+    class: "ssj",
+    label: "SSJ form",
+    powerLevel: {
+      min: 100,
+      max: 999
+    }
   }
-};
+];
 
 const fillMeter = level => {
   const limit = 100;
@@ -29,16 +41,28 @@ const main = () => {
     .pipe(
       scan(level => level + 1, 1),
       tap(level => {
-        console.log({ level });
         sprite.classList.add("powerup");
         fillMeter(level);
       }),
-      map(level => powerLevels[level]),
-      filter(level => level && level.next)
+      map(level =>
+        saiyanLevels.find(function(saiyanLevel) {
+          return (
+            level >= saiyanLevel.powerLevel.min &&
+            level <= saiyanLevel.powerLevel.max
+          );
+        })
+      )
     )
-    .subscribe(({ current, next }) => {
-      sprite.classList.remove(current);
-      sprite.classList.add(next);
+    .subscribe(saiyanLevel => {
+      saiyanLevels.forEach(slevel => {
+        sprite.classList.remove(slevel.class);
+      });
+
+      sprite.classList.add(saiyanLevel.class);
     });
+
+  end.subscribe(() => {
+    sprite.classList.remove("powerup");
+  });
 };
 main();

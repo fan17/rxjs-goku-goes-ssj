@@ -6,32 +6,32 @@ body {
   background-repeat: no-repeat;
 }
 
-.base, .ssj {
+#sprite:not(.powerup) {
   width: 120px;
   height: 250px;
-  animation: stand .8s steps(2) infinite;
+  animation: stand 0.8s steps(2) infinite;
 }
 
 .base {
-  background-image: url('img/goku-standing-sheet.png');
+  background-image: url("img/goku-standing-sheet.png");
 }
 
 .ssj {
-  background-image: url('img/goku-ssj-standing-sheet.png');
+  background-image: url("img/goku-ssj-standing-sheet.png");
 }
 
 .powerup.base {
   width: 210px;
   height: 257px;
-  background-image: url('img/goku-powerup-sheet.png');
-  animation: powerup .3s steps(2) infinite;
+  background-image: url("img/goku-powerup-sheet.png");
+  animation: powerup 0.3s steps(2) infinite;
 }
 
 .powerup.ssj {
   width: 225px;
   height: 257px;
-  background-image: url('img/goku-ssj-powerup-sheet.png');
-  animation: powerup .3s steps(2) infinite;
+  background-image: url("img/goku-ssj-powerup-sheet.png");
+  animation: powerup 0.3s steps(2) infinite;
 }
 
 #meter-container {
@@ -50,16 +50,24 @@ body {
   left: 0;
   top: 0;
   height: 100%;
-  background-color: #FFFD38;
+  background-color: #fffd38;
   z-index: -1;
 }
 
 @keyframes stand {
-  from { background-position: 0px; }
-  to { background-position: -255px; }
+  from {
+    background-position: 0px;
+  }
+  to {
+    background-position: -255px;
+  }
 }
 
 @keyframes powerup {
-  from { background-position: 0px; }
-  to { background-position: -513px; }
+  from {
+    background-position: 0px;
+  }
+  to {
+    background-position: -513px;
+  }
 }
